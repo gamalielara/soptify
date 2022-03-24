@@ -24,13 +24,14 @@ textarea {
   height: auto;
   margin: auto;
   border-radius: 10px;
-  width: 80%;
 }
 
 .form-container {
   background-color: #191414;
   display: flex;
   color: white;
+  margin-top: 50px;
+  width: 50%;
 }
 
 .form-container img {
@@ -51,14 +52,14 @@ textarea {
   color: white;
   background-color: #191414;
   padding: 10px;
+  width: 80%;
 }
 
 .playlist-info {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin: 20px auto;
   width: fit-content;
-  justify-content: space-between;
 }
 
 .playlist-info img {
@@ -67,6 +68,7 @@ textarea {
 
 .desc-playlist {
   margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 .desc-playlist > h1,
@@ -76,7 +78,7 @@ p {
 }
 
 .playlist-container table {
-  margin: 0 auto;
+  margin: 50px auto;
 }
 
 table,
