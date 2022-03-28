@@ -1,16 +1,26 @@
 import React from "react";
 
-const RowItem = ({ image, title, artist, album }) => {
+const RowItem = ({ image, title, artist, album, index, link, releaseDate }) => {
   return (
     <tr>
+      <td>{index}</td>
       <td>
-        <img src={image} alt="" />
+        <div className="song-wrapper">
+          <img src={image} alt="" />
+          <div className="song-title-info">
+            <p>
+              <strong>{title}</strong>
+            </p>
+            <p>{artist}</p>
+          </div>
+        </div>
       </td>
-      <td>{title}</td>
-      <td>{artist}</td>
       <td>{album}</td>
+      <td>{releaseDate}</td>
       <td>
-        <button>Select</button>
+        <a href={link} target="_blank">
+          <button>Select</button>
+        </a>
       </td>
     </tr>
   );

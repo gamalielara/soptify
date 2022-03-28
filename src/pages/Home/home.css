@@ -58,12 +58,23 @@ textarea {
 .playlist-info {
   display: flex;
   align-items: flex-end;
-  margin: 20px auto;
+  margin: 50px 100px;
   width: fit-content;
 }
 
 .playlist-info img {
-  width: 25%;
+  width: 200px;
+}
+
+.song-wrapper {
+  display: flex;
+}
+
+.song-wrapper img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
 .desc-playlist {
@@ -79,17 +90,12 @@ p {
 
 .playlist-container table {
   margin: 50px auto;
-}
-
-table,
-th,
-td {
-  text-align: center;
+  width: 80%;
 }
 
 .playlist-container table th,
 td {
-  width: 10%;
+  text-align: left;
 }
 
 input,
