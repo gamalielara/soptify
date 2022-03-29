@@ -29,16 +29,3 @@ h1 {
 td {
   text-align: left;
 }
-
-.play-btn {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50% !important;
-  margin-top: 15px;
-}
-
-.play-btn i {
-  font-size: 2rem;
-  color: black;
-  margin-left: 5px;
-}

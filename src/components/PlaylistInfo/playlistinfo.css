@@ -39,3 +39,30 @@ p {
 .desc-playlist h4 {
   margin-bottom: 0;
 }
+
+.bottom-menu-wrapper {
+  display: flex;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.play-btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50% !important;
+  margin: 15px 20px;
+}
+
+.play-btn i {
+  font-size: 2rem;
+  color: black;
+  margin-left: 5px;
+}
+
+.search-btn {
+  background: none;
+}

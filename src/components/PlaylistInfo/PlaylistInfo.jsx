@@ -14,9 +14,17 @@ const PlaylistInfo = ({ image, name, desc, songNumber }) => {
           </h4>
         </div>
       </div>
-      <button className="play-btn">
-        <i className="fa-solid fa-play"></i>
-      </button>
+      <div className="bottom-menu-wrapper">
+        <button className="play-btn">
+          <i className="fa-solid fa-play"></i>
+        </button>
+        <div className="search-input">
+          <input type="text" placeholder="Find songs ..." />
+          <button className="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
