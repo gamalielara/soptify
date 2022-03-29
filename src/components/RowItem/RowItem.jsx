@@ -1,4 +1,5 @@
 import React from "react";
+import "./rowitem.css";
 
 const RowItem = ({ image, title, artist, album, index, link, releaseDate }) => {
   return (

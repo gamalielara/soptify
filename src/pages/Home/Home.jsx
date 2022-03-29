@@ -1,9 +1,9 @@
 import React from "react";
 import "./home.css";
 import data from "../../single-sample";
-import AddSong from "../../components/AddSong";
-import PlaylistInfo from "../../components/PlaylistInfo";
-import SongsLists from "../../components/SongsLists";
+import AddSong from "../../components/AddSong/AddSong";
+import PlaylistInfo from "../../components/PlaylistInfo/PlaylistInfo";
+import SongsLists from "../../components/SongsLists/SongsLists";
 
 const Home = () => {
   return (
@@ -17,6 +17,7 @@ const Home = () => {
           }
           name={"My Playlist"}
           desc={"This is gamalielboanerges's playlist"}
+          songNumber={10}
         />
         <SongsLists data={data} />
       </div>

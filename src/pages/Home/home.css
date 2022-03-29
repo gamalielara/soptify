@@ -1,91 +1,23 @@
 * {
-  font-family: "Helvetica";
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
-  background-color: #1c1c1c;
+  background-color: #191414;
 }
 
 h1 {
   text-align: center;
   color: white;
-}
-
-input,
-textarea {
-  display: block;
-  border-radius: 2px;
-  padding: 10px;
-}
-
-.form-container,
-.playlist-container {
-  height: auto;
-  margin: auto;
-  border-radius: 10px;
-}
-
-.form-container {
-  background-color: #191414;
-  display: flex;
-  color: white;
-  margin-top: 50px;
-  width: 50%;
-}
-
-.form-container img {
-  width: 50%;
-  object-fit: cover;
-  border-top-left-radius: inherit;
-  border-bottom-left-radius: inherit;
-}
-.form-container form {
-  margin: 10px;
-  width: 50%;
-}
-
-.playlist-container {
-  border: 1px solid black;
-  margin-top: 20px;
-  min-height: 90vh;
-  color: white;
-  background-color: #191414;
-  padding: 10px;
-  width: 80%;
-}
-
-.playlist-info {
-  display: flex;
-  align-items: flex-end;
-  margin: 50px 100px;
-  width: fit-content;
-}
-
-.playlist-info img {
-  width: 200px;
-}
-
-.song-wrapper {
-  display: flex;
-}
-
-.song-wrapper img {
-  width: 75px;
-  height: 75px;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.desc-playlist {
-  margin-left: 15px;
-  margin-bottom: 15px;
-}
-
-.desc-playlist > h1,
-p {
-  text-align: left;
-  margin: 0;
 }
 
 .playlist-container table {
@@ -98,72 +30,15 @@ td {
   text-align: left;
 }
 
-input,
-textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid white;
-  background-color: transparent;
-  color: white;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-}
-
-input {
-  margin-bottom: 10px;
-}
-
-button {
-  background-color: #1ed760;
-  padding: 10px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-button.button-submit {
-  margin-top: 15px;
-  border-radius: 20px;
-}
-
 .play-btn {
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50% !important;
   margin-top: 15px;
 }
 
-.song-item {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  width: fit-content;
-  width: 75%;
-  justify-content: flex-start;
-}
-
-.song-artist {
-  color: gray;
-}
-
-.song-info {
-  margin-left: 10px;
-}
-
-.song-info h4,
-p {
-  margin: 0;
-  text-align: left;
-}
-
-.song-info p {
-  font-size: 12px;
+.play-btn i {
+  font-size: 2rem;
+  color: black;
+  margin-left: 5px;
 }

@@ -1,0 +1,64 @@
+.form-container,
+.playlist-container {
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.form-container {
+  background-color: #191414;
+  display: flex;
+  color: white;
+  margin-top: 50px;
+  width: 50%;
+}
+
+.form-container img {
+  width: 50%;
+  object-fit: cover;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+.form-container form {
+  margin: 10px;
+  width: 50%;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  color: white;
+  display: block;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #1ed760;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button.button-submit {
+  margin-top: 15px;
+  border-radius: 20px;
+}

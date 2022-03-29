@@ -1,0 +1,41 @@
+.playlist-container {
+  border: 1px solid black;
+  margin-top: 20px;
+  min-height: 90vh;
+  color: white;
+  background-color: #1c1c1c;
+  padding: 10px;
+  width: 80%;
+}
+
+.playlist-info-wrapper {
+  margin: 50px 100px;
+}
+
+.playlist-info {
+  display: flex;
+  align-items: flex-end;
+  width: fit-content;
+}
+
+.playlist-info img {
+  width: 200px;
+}
+
+.desc-playlist {
+  margin-left: 15px;
+}
+
+.desc-playlist > h1 {
+  font-size: 4rem;
+}
+
+.desc-playlist > h1,
+p {
+  text-align: left;
+  margin: 0;
+}
+
+.desc-playlist h4 {
+  margin-bottom: 0;
+}

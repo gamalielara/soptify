@@ -1,5 +1,5 @@
 import React from "react";
-import RowItem from "./RowItem";
+import RowItem from "../RowItem/RowItem";
 
 const SongsLists = ({ data }) => {
   return (
