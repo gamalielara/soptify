@@ -20,12 +20,50 @@ h1 {
   color: white;
 }
 
-.playlist-container table {
-  margin: 50px auto;
+.playlist-container {
+  border: 1px solid black;
+  margin-top: 20px;
+  min-height: 90vh;
+  color: white;
+  background-color: #1c1c1c;
+  padding: 50px;
   width: 80%;
+}
+
+.playlist-container table {
+  width: 100%;
 }
 
 .playlist-container table th,
 td {
   text-align: left;
+}
+
+.bottom-menu-wrapper {
+  display: flex;
+  width: 90%;
+  margin: 10px auto;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.play-btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50% !important;
+  margin: 15px 20px;
+}
+
+.play-btn i {
+  font-size: 2rem;
+  color: black;
+  margin-left: 5px;
+}
+
+.search-btn {
+  background: none;
 }

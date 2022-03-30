@@ -1,7 +1,14 @@
 import React from "react";
 import "./rowitem.css";
 
-const RowItem = ({ image, title, artist, album, index, link, releaseDate }) => {
+const RowItem = ({ data, index }) => {
+  const title = data.name;
+  const image = data.album.images[2].url;
+  const artist = data.artists[0].name;
+  const album = data.album.name;
+  const releaseDate = data.album.release_date;
+  const link = data.external_urls.spotify;
+
   return (
     <tr>
       <td>{index}</td>
@@ -11,6 +18,7 @@ const RowItem = ({ image, title, artist, album, index, link, releaseDate }) => {
           <div className="song-title-info">
             <p>
               <strong>{title}</strong>
+              {data.explicit && <i class="fa-solid fa-e explicit"></i>}
             </p>
             <p>{artist}</p>
           </div>

@@ -27,6 +27,7 @@ p {
 
 .song-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .song-wrapper img {
@@ -34,4 +35,10 @@ p {
   height: 75px;
   object-fit: cover;
   margin-right: 10px;
+}
+
+.explicit {
+  margin-left: 10px;
+  font-size: 0.75rem;
+  font-weight: 200;
 }
