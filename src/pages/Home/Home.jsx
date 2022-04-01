@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import AddSong from "../../components/AddSong/AddSong";
 import PlaylistInfo from "../../components/PlaylistInfo/PlaylistInfo";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import axios from "axios";
+// import AddSong from "../../components/AddSong/AddSong";
 
 const Home = ({ token }) => {
   useEffect(() => {
@@ -13,8 +13,8 @@ const Home = ({ token }) => {
 
   const [searchValue, setSearchValue] = useState("");
   const [authToken, setAuthToken] = useState(null);
-  const [data, setData] = useState(null);
-
+  const [fetchedSongs, setFetchedSongs] = useState([]);
+  const [selectedSongs, setSelectedSongs] = useState([]);
   const ENDPOINTAPI = "https://api.spotify.com/v1/search";
 
   const inputChangeHandler = (e) => {
@@ -32,8 +32,8 @@ const Home = ({ token }) => {
           },
         }
       );
-      const tracks = res.data.tracks;
-      setData(tracks.items);
+      const tracks = res.data.tracks.items;
+      setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +47,7 @@ const Home = ({ token }) => {
         }
         name={"My Playlist"}
         desc={"This is gamalielboanerges's playlist"}
-        songNumber={data ? data.length : 0}
+        songNumber={fetchedSongs ? fetchedSongs.length : 0}
       />
 
       <div className="bottom-menu-wrapper">
@@ -66,8 +66,13 @@ const Home = ({ token }) => {
           </button>
         </div>
       </div>
-
-      <SongsLists items={data} />
+      {fetchedSongs && (
+        <SongsLists
+          songs={fetchedSongs}
+          selectedSongs={selectedSongs}
+          setSelectedSongs={setSelectedSongs}
+        />
+      )}
     </div>
   );
 };

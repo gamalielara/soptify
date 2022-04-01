@@ -1,7 +1,7 @@
 import React from "react";
 import RowItem from "../RowItem/RowItem";
 
-const SongsLists = ({ items }) => {
+const SongsLists = ({ songs, selectedSongs, setSelectedSongs }) => {
   return (
     <table cellPadding="5">
       <thead>
@@ -14,10 +14,16 @@ const SongsLists = ({ items }) => {
         </tr>
       </thead>
       <tbody id="tbody">
-        {items &&
-          items.map((item, i) => (
-            <RowItem key={item.id} data={item} index={i + 1} />
-          ))}
+        {songs.map((song, i) => (
+          <RowItem
+            key={song.id}
+            song={song}
+            index={i + 1}
+            selectedSongs={selectedSongs}
+            setSelectedSongs={setSelectedSongs}
+            isSelected={selectedSongs.includes(song.id)}
+          />
+        ))}
       </tbody>
     </table>
   );

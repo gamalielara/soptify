@@ -42,3 +42,7 @@ p {
   font-size: 0.75rem;
   font-weight: 200;
 }
+
+.title-link:hover {
+  text-decoration: underline;
+}
