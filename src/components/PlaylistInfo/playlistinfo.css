@@ -1,13 +1,14 @@
 .playlist-info {
   display: flex;
   align-items: flex-end;
-  width: fit-content;
-  width: 90%;
-  margin: 0 auto;
+  width: 80%;
+  margin: 0 auto 60px;
 }
 
 .playlist-info img {
   width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .desc-playlist {
@@ -26,4 +27,5 @@ p {
 
 .desc-playlist h4 {
   margin-bottom: 0;
+  margin-top: 5px;
 }

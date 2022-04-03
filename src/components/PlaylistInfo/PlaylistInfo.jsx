@@ -6,6 +6,7 @@ const PlaylistInfo = ({ image, name, desc, songNumber }) => {
     <div className="playlist-info">
       <img src={image} />
       <div className="desc-playlist">
+        <p>PLAYLIST</p>
         <h1>{name}</h1>
         <p>{desc}</p>
         <h4>

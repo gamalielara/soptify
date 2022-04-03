@@ -16,7 +16,8 @@ const RowItem = ({
   const releaseDate = song.album.release_date;
   const link = song.external_urls.spotify;
 
-  const selectedSongsHandler = (isSelected) => {
+  const selectedSongsHandler = (e, isSelected) => {
+    e.preventDefault();
     if (isSelected) {
       setSelectedButton(!selectedButton);
       setSelectedSongs(
@@ -50,9 +51,11 @@ const RowItem = ({
       <td>{album}</td>
       <td>{releaseDate}</td>
       <td>
-        <button onClick={() => selectedSongsHandler(isSelected)}>
-          {selectedButton ? "Deselect" : "Select"}
-        </button>
+        {setSelectedSongs && (
+          <button onClick={(e) => selectedSongsHandler(e, isSelected)}>
+            {selectedButton ? "Deselect" : "Select"}
+          </button>
+        )}
       </td>
     </tr>
   );

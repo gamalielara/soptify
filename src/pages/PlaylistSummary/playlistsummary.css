@@ -1,0 +1,14 @@
+.summary {
+  color: var(--white-spotify);
+  padding: 50px;
+  background-color: var(--black-spotify);
+}
+
+table {
+  margin: 0 auto;
+  width: 80%;
+}
+
+th {
+  text-align: left;
+}

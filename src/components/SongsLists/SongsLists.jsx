@@ -7,9 +7,9 @@ const SongsLists = ({ songs, selectedSongs, setSelectedSongs }) => {
       <thead>
         <tr>
           <th>#</th>
-          <th>Title</th>
-          <th>Album</th>
-          <th>Relase Date</th>
+          <th>TITLE</th>
+          <th>ALBUM</th>
+          <th>RELEASE DATE</th>
           <th></th>
         </tr>
       </thead>
@@ -21,7 +21,7 @@ const SongsLists = ({ songs, selectedSongs, setSelectedSongs }) => {
             index={i + 1}
             selectedSongs={selectedSongs}
             setSelectedSongs={setSelectedSongs}
-            isSelected={selectedSongs.includes(song.id)}
+            isSelected={selectedSongs && selectedSongs.includes(song.id)}
           />
         ))}
       </tbody>
