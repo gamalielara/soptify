@@ -21,7 +21,7 @@ const SongsLists = ({ songs, selectedSongs, setSelectedSongs }) => {
             index={i + 1}
             selectedSongs={selectedSongs}
             setSelectedSongs={setSelectedSongs}
-            isSelected={selectedSongs && selectedSongs.includes(song.id)}
+            isSelected={selectedSongs && selectedSongs.includes(song.uri)}
           />
         ))}
       </tbody>

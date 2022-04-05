@@ -21,11 +21,11 @@ const RowItem = ({
     if (isSelected) {
       setSelectedButton(!selectedButton);
       setSelectedSongs(
-        selectedSongs.filter((selectedSong) => selectedSong !== song.id)
+        selectedSongs.filter((selectedSong) => selectedSong !== song.uri)
       );
     } else {
       setSelectedButton(!selectedButton);
-      setSelectedSongs((prev) => [...prev, song.id]);
+      setSelectedSongs((prev) => [...prev, song.uri]);
     }
   };
 

@@ -4,7 +4,7 @@ import SongsLists from "../../components/SongsLists/SongsLists";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-const CreatePlaylist = ({ token, setPlaylist }) => {
+const CreatePlaylist = ({ token, setPlaylistID }) => {
   useEffect(() => {
     window.history.pushState({}, "", "/");
     setAuthToken(token);
@@ -17,8 +17,14 @@ const CreatePlaylist = ({ token, setPlaylist }) => {
   const [fetchedSongs, setFetchedSongs] = useState(null);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [playlistInfo, setPlaylistInfo] = useState({});
-  const ENDPOINTAPI = "https://api.spotify.com/v1/search";
 
+  const ENDPOINTAPI = "https://api.spotify.com/v1";
+  const USERID = process.env.REACT_APP_USER_ID;
+  const HEADERAUTH = {
+    headers: {
+      Authorization: "Bearer " + authToken,
+    },
+  };
   const inputChangeHandler = (e) => {
     setSearchValue(e.target.value);
   };
@@ -27,12 +33,8 @@ const CreatePlaylist = ({ token, setPlaylist }) => {
     e.preventDefault();
     try {
       const res = await axios.get(
-        `${ENDPOINTAPI}?q=track:${searchValue}&type=album,track`,
-        {
-          headers: {
-            Authorization: "Bearer " + authToken,
-          },
-        }
+        `${ENDPOINTAPI}/search?q=track:${searchValue}&type=album,track`,
+        HEADERAUTH
       );
       const tracks = res.data.tracks.items;
       setFetchedSongs(tracks);
@@ -46,10 +48,46 @@ const CreatePlaylist = ({ token, setPlaylist }) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
 
+  const createPlaylist = async () => {
+    try {
+      const res = await axios.post(
+        `${ENDPOINTAPI}/users/${USERID}/playlists`,
+        {
+          name: playlistInfo.title,
+          public: false,
+          collaborative: false,
+          description: playlistInfo.desc,
+        },
+        HEADERAUTH
+      );
+      addSongsToPlaylist(res.data.id);
+      return res.data.id;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addSongsToPlaylist = async (playlistID) => {
+    try {
+      await axios.post(
+        `${ENDPOINTAPI}/playlists/${playlistID}/tracks`,
+        {
+          uris: selectedSongs,
+          position: 0,
+        },
+        HEADERAUTH
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    setPlaylist({ ...playlistInfo, tracks: selectedSongs });
-    navigate("/summary");
+    createPlaylist().then((playlistID) => {
+      setPlaylistID(playlistID);
+      navigate("/summary");
+    });
   };
 
   return (

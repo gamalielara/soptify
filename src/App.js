@@ -7,7 +7,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [accessToken, setAccessToken] = useState(null);
-  const [playlist, setPlaylist] = useState(null);
+  const [playlistID, setPlaylistID] = useState(null);
 
   useEffect(() => {
     const query = window.location.hash.substr(1).split(/&/g);
@@ -25,7 +25,10 @@ function App() {
           path="/"
           element={
             accessToken ? (
-              <CreatePlaylist token={accessToken} setPlaylist={setPlaylist} />
+              <CreatePlaylist
+                token={accessToken}
+                setPlaylistID={setPlaylistID}
+              />
             ) : (
               <Login />
             )
@@ -35,7 +38,7 @@ function App() {
           path="/summary"
           element={
             accessToken ? (
-              <PlaylistSummary playlistInfo={playlist} token={accessToken} />
+              <PlaylistSummary playlistID={playlistID} token={accessToken} />
             ) : (
               <Login />
             )
