@@ -3,6 +3,8 @@ import "./createplaylist.css";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { updateInput } from "../../redux/searchSlice";
 
 const CreatePlaylist = ({ token, setPlaylistID }) => {
   useEffect(() => {
@@ -11,8 +13,8 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
   }, [token]);
 
   const navigate = useNavigate();
-
-  const [searchValue, setSearchValue] = useState("");
+  const query = useSelector((state) => state.search.query);
+  const dispatch = useDispatch();
   const [authToken, setAuthToken] = useState(null);
   const [fetchedSongs, setFetchedSongs] = useState(null);
   const [selectedSongs, setSelectedSongs] = useState([]);
@@ -25,15 +27,16 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
       Authorization: "Bearer " + authToken,
     },
   };
+
   const inputChangeHandler = (e) => {
-    setSearchValue(e.target.value);
+    dispatch(updateInput(e.target.value));
   };
 
   const searchSongHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.get(
-        `${ENDPOINTAPI}/search?q=track:${searchValue}&type=album,track`,
+        `${ENDPOINTAPI}/search?q=track:${query}&type=album,track`,
         HEADERAUTH
       );
       const tracks = res.data.tracks.items;

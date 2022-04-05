@@ -1,7 +1,7 @@
 import React from "react";
 import "./playlistinfo.css";
 
-const PlaylistInfo = ({ image, name, desc, songNumber }) => {
+const PlaylistInfo = ({ image, name, desc, songNumber, user, url }) => {
   return (
     <div className="playlist-info">
       <img src={image} />
@@ -10,7 +10,7 @@ const PlaylistInfo = ({ image, name, desc, songNumber }) => {
         <h1>{name}</h1>
         <p>{desc}</p>
         <h4>
-          <a href="#">gamalielboanerges</a> &#9679; {songNumber} songs
+          <a href={url}>{user}</a> &#9679; {songNumber} songs
         </h4>
       </div>
     </div>

@@ -53,6 +53,7 @@ const PlaylistSummary = ({ token, playlistID }) => {
           desc={fetchedPlaylist.description || ""}
           songNumber={fetchedPlaylist.tracks.items.length}
           user={fetchedPlaylist.owner.display_name}
+          url={fetchedPlaylist.owner.external_urls.spotify}
         />
         {fetchedSongs.length > 0 ? (
           <SongsLists songs={fetchedSongs} />
