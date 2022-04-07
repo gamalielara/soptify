@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./createplaylist.css";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import axios from "axios";
-import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateInput } from "../../redux/searchSlice";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const CreatePlaylist = ({ token, setPlaylistID }) => {
   useEffect(() => {
-    window.history.pushState({}, "", "/");
+    window.history.pushState({}, "", "/create");
     setAuthToken(token);
   }, [token]);
 
-  const navigate = useNavigate();
+  const history = useHistory();
   const query = useSelector((state) => state.search.query);
   const dispatch = useDispatch();
   const [authToken, setAuthToken] = useState(null);
@@ -89,7 +89,7 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
     e.preventDefault();
     createPlaylist().then((playlistID) => {
       setPlaylistID(playlistID);
-      navigate("/summary");
+      history.push("/summary");
     });
   };
 

@@ -42,6 +42,7 @@ const PlaylistSummary = ({ token, playlistID }) => {
   };
 
   useEffect(() => fetchPlaylist().then((data) => fetchSongs(data)), []);
+  console.log(fetchedPlaylist, fetchedSongs);
 
   return (
     fetchedPlaylist &&
