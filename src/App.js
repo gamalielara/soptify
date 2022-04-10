@@ -1,17 +1,18 @@
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router,
+  Redirect,
+} from "react-router-dom";
 import "./App.css";
 import CreatePlaylist from "./pages/CreatePlaylist/CreatePlaylist";
 import PlaylistSummary from "./pages/PlaylistSummary/PlaylistSummary";
 import Login from "./pages/Login/Login";
-import React, { useEffect, useState } from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "./redux/tokenSlice";
-import { Redirect } from "react-router-dom";
 import Home from "./components/Home/Home";
+import { useState } from "react";
 
 function App() {
   const token = localStorage.getItem("user");
-  const dispatch = useDispatch();
   const [playlistID, setPlaylistID] = useState(null);
 
   return (

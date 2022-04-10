@@ -1,4 +1,3 @@
-import React from "react";
 import RowItem from "../RowItem/RowItem";
 
 const SongsLists = ({ songs, selectedSongs, setSelectedSongs }) => {

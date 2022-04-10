@@ -6,11 +6,11 @@ export const tokenSlice = createSlice({
     value: "",
   },
   reducers: {
-    getToken(state, action) {
+    updateToken(state, action) {
       state.value = action.payload;
     },
   },
 });
 
-export const { getToken } = tokenSlice.actions;
+export const { updateToken } = tokenSlice.actions;
 export default tokenSlice.reducer;

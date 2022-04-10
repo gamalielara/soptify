@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./rowitem.css";
 
 const RowItem = ({
@@ -38,7 +38,12 @@ const RowItem = ({
           <div className="song-title-info">
             <p>
               <strong>
-                <a href={link} className="title-link" target="_blank">
+                <a
+                  href={link}
+                  rel="noreferrer"
+                  className="title-link"
+                  target="_blank"
+                >
                   {title}
                 </a>
               </strong>
