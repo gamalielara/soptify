@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import CreatePlaylist from "../../pages/CreatePlaylist/CreatePlaylist";
 import { updateToken } from "../../redux/tokenSlice";
 import Login from "../../pages/Login/Login";
+import { Redirect } from "react-router-dom";
 
 const Home = ({ setPlaylistID }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const Home = ({ setPlaylistID }) => {
       localStorage.setItem("user", urlToken);
     }
   }, [dispatch]);
-  const token = useSelector((state) => state.token.value);
+
+  const token =
+    useSelector((state) => state.token.value) || localStorage.getItem("user");
 
   return (
     <>

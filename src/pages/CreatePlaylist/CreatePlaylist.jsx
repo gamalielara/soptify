@@ -4,6 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import "./createplaylist.css";
 import axios from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Button,
+  Image,
+  Flex,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -94,59 +106,140 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
     });
   };
 
+  const checkTitleError = playlistInfo.title && playlistInfo.title.length < 10;
+
   return (
-    <div className="playlist-container">
-      <form action="" onSubmit={submitHandler}>
-        <div className="form-container">
-          <div className="form-top">
-            <img
-              src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
-              alt=""
+    // <div className="playlist-container">
+    //   <form action="" onSubmit={submitHandler}>
+    //     <div className="form-container">
+    //       <div className="form-top">
+    //         <img
+    //           src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
+    //           alt=""
+    //         />
+    //         <div className="form-desc-playlist">
+    //           <h1>Create Playlist</h1>
+    //           <input
+    //             type="text"
+    //             name="title"
+    //             id="title"
+    //             className="input"
+    //             placeholder="Insert Title (Required)"
+    //             onChange={playlistInfoInputHandler}
+    //           />
+    //           <textarea
+    //             name="desc"
+    //             id="desc"
+    //             className="input"
+    //             placeholder="Insert Descrtiption"
+    //             onChange={playlistInfoInputHandler}
+    //           ></textarea>
+    //         </div>
+    //       </div>
+    //       <h2>Add Songs</h2>
+    //       <div className="search-input">
+    //         <input
+    //           type="text"
+    //           placeholder="Find songs ..."
+    //           onChange={inputChangeHandler}
+    //           onKeyPress={(e) => e.key === "Enter" && searchSongHandler(e)}
+    //         />
+    //         <button className="search-btn" onClick={searchSongHandler}>
+    //           <i className="fa-solid fa-magnifying-glass"></i>
+    //         </button>
+    //       </div>
+    //       {fetchedSongs && (
+    //         <SongsLists
+    //           songs={fetchedSongs}
+    //           selectedSongs={selectedSongs}
+    //           setSelectedSongs={setSelectedSongs}
+    //         />
+    //       )}
+    //       <button type="submit" className="button-submit" id="button-submit">
+    //         <h3>Create Playlist</h3>
+    //       </button>
+    //     </div>
+    //   </form>
+    // </div>
+    <>
+      <Flex m="50px auto" bg="white" width="50%" borderRadius="10px">
+        <Image
+          src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
+          alt=""
+          width="30%"
+          variant="form-image"
+        />
+        <Box p={10} width="70%">
+          <FormControl isInvalid={checkTitleError}>
+            <Text fontSize="xl" mb={15} fontWeight={600} color="black">
+              Create A New playlist
+            </Text>
+            <FormLabel htmlFor="playlist-title">
+              Playlist Title (min. 10 words)
+            </FormLabel>
+            <Input
+              id="playlist-title"
+              placeholder="Insert Playlist Title Here ...."
+              name="title"
+              color="black"
+              onChange={playlistInfoInputHandler}
             />
-            <div className="form-desc-playlist">
-              <h1>Create Playlist</h1>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                className="input"
-                placeholder="Insert Title (Required)"
-                onChange={playlistInfoInputHandler}
-              />
-              <textarea
-                name="desc"
-                id="desc"
-                className="input"
-                placeholder="Insert Descrtiption"
-                onChange={playlistInfoInputHandler}
-              ></textarea>
-            </div>
-          </div>
-          <h2>Add Songs</h2>
-          <div className="search-input">
-            <input
-              type="text"
-              placeholder="Find songs ..."
-              onChange={inputChangeHandler}
-              onKeyPress={(e) => e.key === "Enter" && searchSongHandler(e)}
+            {checkTitleError ? (
+              <FormHelperText>
+                The playlist title must contain 10 characters or more.
+              </FormHelperText>
+            ) : (
+              <FormHelperText>Insert playlist title Here</FormHelperText>
+            )}
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="playlist-desc" mt={5}>
+              Playlist Description
+            </FormLabel>
+            <Input
+              id="playlist-desc"
+              placeholder="Insert Playlist Description Here ...."
+              name="desc"
+              color="black"
+              onChange={playlistInfoInputHandler}
             />
-            <button className="search-btn" onClick={searchSongHandler}>
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
-          {fetchedSongs && (
-            <SongsLists
-              songs={fetchedSongs}
-              selectedSongs={selectedSongs}
-              setSelectedSongs={setSelectedSongs}
-            />
-          )}
-          <button type="submit" className="button-submit" id="button-submit">
-            <h3>Create Playlist</h3>
-          </button>
-        </div>
-      </form>
-    </div>
+          </FormControl>
+        </Box>
+      </Flex>
+      <Box width="50%" margin="10px auto">
+        <Flex>
+          <Input
+            type="text"
+            placeholder="Find songs ..."
+            color="white"
+            onChange={inputChangeHandler}
+            onKeyPress={(e) => e.key === "Enter" && searchSongHandler(e)}
+          />
+          <Button onClick={searchSongHandler} ml={5}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </Button>
+        </Flex>
+      </Box>
+
+      {fetchedSongs && (
+        <SongsLists
+          songs={fetchedSongs}
+          selectedSongs={selectedSongs}
+          setSelectedSongs={setSelectedSongs}
+        />
+      )}
+      <Button
+        mt={4}
+        bg="greenSpotify"
+        type="submit"
+        variant="test"
+        onClick={submitHandler}
+        m="50px auto 0"
+        display="block"
+      >
+        Create Playlist
+      </Button>
+    </>
   );
 };
 

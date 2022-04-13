@@ -29,6 +29,7 @@ const PlaylistSummary = ({ token, playlistID }) => {
   };
 
   const fetchSongs = (data) => {
+    console.log(data);
     const tracks = data.tracks.items;
     tracks.forEach(async (song) => {
       try {
