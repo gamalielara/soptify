@@ -1,16 +1,48 @@
 .login-container {
-  width: 80vw;
+  width: 100vw;
   height: 100vh;
   margin: 0 auto;
   display: flex;
+  background-image: url("../../../public/img/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .login {
-  margin: auto;
+  position: relative;
+  width: 100%;
+}
+
+.logo-image {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  width: 15%;
+}
+
+.login .hero-container {
+  position: absolute;
+  width: 50%;
+  top: 50%;
+  right: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.login .hero-container h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: right;
+}
+.login .hero-container h4 {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: right;
 }
 
 .login-btn {
-  margin: 5px auto;
+  margin: 5px 0;
   background-color: var(--green-spotify);
   padding: 10px 20px;
 }

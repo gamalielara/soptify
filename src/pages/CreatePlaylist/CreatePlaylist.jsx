@@ -7,7 +7,6 @@ import SongsLists from "../../components/SongsLists/SongsLists";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
   Input,
   Button,
@@ -20,11 +19,6 @@ import {
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const CreatePlaylist = ({ token, setPlaylistID }) => {
-  useEffect(() => {
-    window.history.pushState({}, "", "/create");
-    setAuthToken(token);
-  }, [token]);
-
   const history = useHistory();
   const query = useSelector((state) => state.search.query);
   const dispatch = useDispatch();
@@ -40,6 +34,10 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
       Authorization: "Bearer " + authToken,
     },
   };
+
+  useEffect(() => {
+    setAuthToken(token);
+  }, [token]);
 
   const inputChangeHandler = (e) => {
     dispatch(updateInput(e.target.value));
@@ -109,58 +107,6 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
   const checkTitleError = playlistInfo.title && playlistInfo.title.length < 10;
 
   return (
-    // <div className="playlist-container">
-    //   <form action="" onSubmit={submitHandler}>
-    //     <div className="form-container">
-    //       <div className="form-top">
-    //         <img
-    //           src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
-    //           alt=""
-    //         />
-    //         <div className="form-desc-playlist">
-    //           <h1>Create Playlist</h1>
-    //           <input
-    //             type="text"
-    //             name="title"
-    //             id="title"
-    //             className="input"
-    //             placeholder="Insert Title (Required)"
-    //             onChange={playlistInfoInputHandler}
-    //           />
-    //           <textarea
-    //             name="desc"
-    //             id="desc"
-    //             className="input"
-    //             placeholder="Insert Descrtiption"
-    //             onChange={playlistInfoInputHandler}
-    //           ></textarea>
-    //         </div>
-    //       </div>
-    //       <h2>Add Songs</h2>
-    //       <div className="search-input">
-    //         <input
-    //           type="text"
-    //           placeholder="Find songs ..."
-    //           onChange={inputChangeHandler}
-    //           onKeyPress={(e) => e.key === "Enter" && searchSongHandler(e)}
-    //         />
-    //         <button className="search-btn" onClick={searchSongHandler}>
-    //           <i className="fa-solid fa-magnifying-glass"></i>
-    //         </button>
-    //       </div>
-    //       {fetchedSongs && (
-    //         <SongsLists
-    //           songs={fetchedSongs}
-    //           selectedSongs={selectedSongs}
-    //           setSelectedSongs={setSelectedSongs}
-    //         />
-    //       )}
-    //       <button type="submit" className="button-submit" id="button-submit">
-    //         <h3>Create Playlist</h3>
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
     <>
       <Flex m="50px auto" bg="white" width="50%" borderRadius="10px">
         <Image

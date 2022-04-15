@@ -19,6 +19,10 @@ const theme = extendTheme({
       h5: { color: "white" },
       h6: { color: "white" },
       p: { color: "white" },
+      a: {
+        color: "white",
+        textDecoration: "none",
+      },
       span: { color: "white" },
       button: {
         backgroundColor: "#1ed760",

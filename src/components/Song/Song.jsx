@@ -41,12 +41,12 @@ const Song = ({ song, index, setSelectedSongs, selectedSongs, isSelected }) => {
         </p>
         <p>{album}</p>
         <p>{releaseDate}</p>
-        {setSelectedSongs && (
-          <button onClick={(e) => selectedSongsHandler(e, isSelected)}>
-            {selectedButton ? "Deselect" : "Select"}
-          </button>
-        )}
       </div>
+      {setSelectedSongs && (
+        <button onClick={(e) => selectedSongsHandler(e, isSelected)}>
+          {selectedButton ? "Deselect" : "Select"}
+        </button>
+      )}
     </div>
   );
 };

@@ -1,0 +1,25 @@
+.auth {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../../../public/img/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.auth h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.auth a {
+  text-align: center;
+  background-color: var(--green-spotify);
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 0 auto;
+}
