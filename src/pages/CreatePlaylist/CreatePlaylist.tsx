@@ -1,9 +1,11 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { updateInput } from "../../redux/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./createplaylist.css";
 import axios from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
+import { useHistory } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -16,16 +18,34 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+interface Props {
+  token: string;
+  setPlaylistID: (playlistID: string) => void;
+}
 
-const CreatePlaylist = ({ token, setPlaylistID }) => {
+interface Search {
+  search: {
+    query: string;
+  };
+}
+
+interface PlaylistInfo {
+  title: string;
+  desc?: string;
+}
+
+const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
   const history = useHistory();
-  const query = useSelector((state) => state.search.query);
   const dispatch = useDispatch();
-  const [authToken, setAuthToken] = useState(null);
-  const [fetchedSongs, setFetchedSongs] = useState(null);
-  const [selectedSongs, setSelectedSongs] = useState([]);
-  const [playlistInfo, setPlaylistInfo] = useState({});
+  const query = useSelector((state: Search) => state.search.query);
+
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [fetchedSongs, setFetchedSongs] = useState<string[] | null>(null);
+  const [selectedSongs, setSelectedSongs] = useState<string[]>([]);
+  const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo>({
+    title: "",
+    desc: "",
+  });
 
   const ENDPOINTAPI = "https://api.spotify.com/v1";
   const USERID = process.env.REACT_APP_USER_ID;
@@ -39,25 +59,25 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
     setAuthToken(token);
   }, [token]);
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateInput(e.target.value));
   };
 
-  const searchSongHandler = async (e) => {
+  const searchSongHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const res = await axios.get(
         `${ENDPOINTAPI}/search?q=track:${query}&type=album,track`,
         HEADERAUTH
       );
-      const tracks = res.data.tracks.items;
+      const tracks: string[] = res.data.tracks.items;
       setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const playlistInfoInputHandler = (e) =>
+  const playlistInfoInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPlaylistInfo((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -81,7 +101,7 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
     }
   };
 
-  const addSongsToPlaylist = async (playlistID) => {
+  const addSongsToPlaylist = async (playlistID: string) => {
     try {
       await axios.post(
         `${ENDPOINTAPI}/playlists/${playlistID}/tracks`,
@@ -96,15 +116,15 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    createPlaylist().then((playlistID) => {
+    createPlaylist().then((playlistID: string) => {
       setPlaylistID(playlistID);
       history.push("/summary");
     });
   };
 
-  const checkTitleError = playlistInfo.title && playlistInfo.title.length < 10;
+  const checkTitleError: boolean = playlistInfo.title.length < 10;
 
   return (
     <>
@@ -113,7 +133,8 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
           src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
           alt=""
           width="30%"
-          variant="form-image"
+          borderTopLeftRadius="10px"
+          borderBottomLeftRadius="10px"
         />
         <Box p={10} width="70%">
           <FormControl isInvalid={checkTitleError}>
@@ -159,7 +180,6 @@ const CreatePlaylist = ({ token, setPlaylistID }) => {
             placeholder="Find songs ..."
             color="white"
             onChange={inputChangeHandler}
-            onKeyPress={(e) => e.key === "Enter" && searchSongHandler(e)}
           />
           <Button onClick={searchSongHandler} ml={5}>
             <i className="fa-solid fa-magnifying-glass"></i>

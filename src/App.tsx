@@ -12,12 +12,14 @@ import { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme/theme";
 import { useSelector } from "react-redux";
+import { Token } from "./interface/interface";
 import Auth from "./pages/Auth/Auth";
 
 function App() {
   const token =
-    useSelector((state) => state.token.value) || localStorage.getItem("user");
-  const [playlistID, setPlaylistID] = useState(null);
+    useSelector((state: Token) => state.token.value) ||
+    localStorage.getItem("user");
+  const [playlistID, setPlaylistID] = useState<string | null>(null);
 
   return (
     <Router>
@@ -43,7 +45,7 @@ function App() {
           <Route path="/callback">
             <Auth />
           </Route>
-          <Route exact path="/">
+          <Route exact={true} path="/">
             {token ? <Redirect to="/create" /> : <Redirect to="/login" />}
           </Route>
         </ChakraProvider>

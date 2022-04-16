@@ -44,14 +44,6 @@ const theme = extendTheme({
         backgroundColor: "#1ed760 !important",
       },
     },
-    Image: {
-      variants: {
-        "form-image": {
-          borderTopLeftRadius: "10px",
-          borderBottomLeftRadius: "10px",
-        },
-      },
-    },
   },
 });
 

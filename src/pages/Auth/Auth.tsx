@@ -1,10 +1,12 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { updateToken } from "../../redux/tokenSlice";
 import { Link } from "react-router-dom";
 import "./auth.css";
+import { Token } from "../../interface/interface";
 
-const Auth = () => {
+const Auth: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const query = window.location.hash.substr(1).split(/&/g);
@@ -16,16 +18,18 @@ const Auth = () => {
     }
   });
 
-  const token = useSelector((state) => state.token.value);
+  const token = useSelector((state: Token) => state.token.value);
   console.log(token);
 
   return (
-    token && (
-      <div className="auth">
-        <h1>Authentication is Successful!</h1>
-        <Link to="/create">Continue to Spotify</Link>
-      </div>
-    )
+    <>
+      {token && (
+        <div className="auth">
+          <h1>Authentication is Successful!</h1>
+          <Link to="/create">Continue to Soptify</Link>
+        </div>
+      )}
+    </>
   );
 };
 
