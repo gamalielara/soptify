@@ -1,30 +1,39 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedSongs } from "../../redux/selectedSongsSlice";
 import "./song.css";
 
-const Song = ({ song, index, setSelectedSongs, selectedSongs, isSelected }) => {
+const Song = ({
+  title,
+  image,
+  album,
+  releaseDate,
+  link,
+  isSelected,
+  isExplicit,
+  uri,
+}) => {
   const [selectedButton, setSelectedButton] = useState(isSelected);
-  const title = song.name;
-  const image = song.album.images[0].url;
-  const album = song.album.name;
-  const releaseDate = song.album.release_date;
-  const link = song.external_urls.spotify;
+  const selectedSongs = useSelector((state) => state.selectedSongs.value);
+  const dispatch = useDispatch();
 
   const selectedSongsHandler = (e, isSelected) => {
     e.preventDefault();
     if (isSelected) {
       setSelectedButton(!selectedButton);
-      setSelectedSongs(
-        selectedSongs.filter((selectedSong) => selectedSong !== song.uri)
+      const updatedSongs = selectedSongs.filter(
+        (selectedSong) => selectedSong !== uri
       );
+      dispatch(setSelectedSongs(updatedSongs));
     } else {
       setSelectedButton(!selectedButton);
-      setSelectedSongs((prev) => [...prev, song.uri]);
+      dispatch(setSelectedSongs([...selectedSongs, uri]));
     }
   };
 
   return (
     <div className="song-container">
-      <img src={image} alt="" />
+      <img src={image} alt={title} />
       <div className="song-detail">
         <p>
           <strong>
@@ -37,7 +46,7 @@ const Song = ({ song, index, setSelectedSongs, selectedSongs, isSelected }) => {
               {title}
             </a>
           </strong>
-          {song.explicit && <i className="fa-solid fa-e explicit"></i>}
+          {isExplicit && <i className="fa-solid fa-e explicit"></i>}
         </p>
         <p>{album}</p>
         <p>{releaseDate}</p>

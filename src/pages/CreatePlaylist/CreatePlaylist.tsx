@@ -2,10 +2,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { updateInput } from "../../redux/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import "./createplaylist.css";
 import axios from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import { useHistory } from "react-router-dom";
+import { SongItem } from "../../interface/interface";
 import {
   FormControl,
   FormLabel,
@@ -17,6 +17,7 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
+import "./createplaylist.css";
 
 interface Props {
   token: string;
@@ -29,6 +30,12 @@ interface Search {
   };
 }
 
+interface SelectedSongs {
+  selectedSongs: {
+    value: string[];
+  };
+}
+
 interface PlaylistInfo {
   title: string;
   desc?: string;
@@ -38,10 +45,12 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const query = useSelector((state: Search) => state.search.query);
+  const selectedSongs = useSelector(
+    (state: SelectedSongs) => state.selectedSongs.value
+  );
 
   const [authToken, setAuthToken] = useState<string | null>(null);
-  const [fetchedSongs, setFetchedSongs] = useState<string[] | null>(null);
-  const [selectedSongs, setSelectedSongs] = useState<string[]>([]);
+  const [fetchedSongs, setFetchedSongs] = useState<SongItem[] | null>(null);
   const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo>({
     title: "",
     desc: "",
@@ -70,7 +79,7 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
         `${ENDPOINTAPI}/search?q=track:${query}&type=album,track`,
         HEADERAUTH
       );
-      const tracks: string[] = res.data.tracks.items;
+      const tracks = res.data.tracks.items;
       setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
@@ -187,13 +196,8 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
         </Flex>
       </Box>
 
-      {fetchedSongs && (
-        <SongsLists
-          songs={fetchedSongs}
-          selectedSongs={selectedSongs}
-          setSelectedSongs={setSelectedSongs}
-        />
-      )}
+      {fetchedSongs && <SongsLists songs={fetchedSongs} />}
+
       <Button
         mt={4}
         bg="greenSpotify"
