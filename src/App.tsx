@@ -14,6 +14,8 @@ import theme from "./theme/theme";
 import { useSelector } from "react-redux";
 import { Token } from "./interface/interface";
 import Auth from "./pages/Auth/Auth";
+import Profile from "./pages/Profile/Profile";
+export const ENDPOINTAPI = "https://api.spotify.com/v1";
 
 function App() {
   const token =
@@ -37,13 +39,16 @@ function App() {
           </Route>
           <Route path="/create">
             {token ? (
-              <CreatePlaylist token={token} setPlaylistID={setPlaylistID} />
+              <CreatePlaylist setPlaylistID={setPlaylistID} />
             ) : (
               <Redirect to="/login" />
             )}
           </Route>
           <Route path="/callback">
             <Auth />
+          </Route>
+          <Route path="/me">
+            {token ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Route exact={true} path="/">
             {token ? <Redirect to="/create" /> : <Redirect to="/login" />}

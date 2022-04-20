@@ -57,6 +57,11 @@ a {
 }
 
 a:hover {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+a:hover {
   text-decoration: underline;
 }
 

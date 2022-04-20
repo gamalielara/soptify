@@ -5,7 +5,6 @@ import { updateToken } from "../../redux/tokenSlice";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import { Token } from "../../interface/interface";
-import Navbar from "../../components/Navbar/Navbar";
 
 const Auth: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,6 @@ const Auth: React.FC = () => {
   });
 
   const token = useSelector((state: Token) => state.token.value);
-  console.log(token);
 
   return (
     <>

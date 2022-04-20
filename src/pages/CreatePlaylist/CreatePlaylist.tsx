@@ -7,6 +7,7 @@ import axios from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import { useHistory } from "react-router-dom";
 import { SelectedSongs, SongItem } from "../../interface/interface";
+import { ENDPOINTAPI } from "../../App";
 import {
   FormControl,
   FormLabel,
@@ -18,10 +19,8 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-import "./createplaylist.css";
 
 interface Props {
-  token: string;
   setPlaylistID: (playlistID: string) => void;
 }
 
@@ -36,7 +35,7 @@ interface PlaylistInfo {
   desc?: string;
 }
 
-const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
+const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const query = useSelector((state: Search) => state.search.query);
@@ -51,7 +50,6 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
     desc: "",
   });
 
-  const ENDPOINTAPI = "https://api.spotify.com/v1";
   const USERID = process.env.REACT_APP_USER_ID;
   const HEADERAUTH = {
     headers: {
@@ -60,8 +58,8 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
   };
 
   useEffect(() => {
-    setAuthToken(token);
-  }, [token]);
+    setAuthToken(localStorage.getItem("user"));
+  }, []);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateInput(e.target.value));
@@ -159,10 +157,8 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
               >
                 Create A New Playlist
               </Text>
-              <FormLabel htmlFor="playlist-title">
-                <Text fontSize={["sm", "lg"]}>
-                  Playlist Title (min. 10 words)
-                </Text>
+              <FormLabel htmlFor="playlist-title" fontSize={["sm", "lg"]}>
+                Playlist Title (min. 10 words)
               </FormLabel>
               <Input
                 id="playlist-title"

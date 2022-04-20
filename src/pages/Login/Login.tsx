@@ -1,11 +1,10 @@
 import * as React from "react";
-import Navbar from "../../components/Navbar/Navbar";
 import "./login.css";
 
 const Login: React.FC = () => {
   return (
     <div className="login-container w-full h-screen my-0">
-      <Navbar isLogin={false} />
+      {/* <Navbar isLogin={false} /> */}
       <div className="login w-full">
         <div className="hero-container fixed md:w-1/2 md:top-1/2 top-1/4 w-3/4 right-8 flex flex-col items-end">
           <h1 className="text-5xl font-bold text-right">

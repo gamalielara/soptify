@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import MobileNavbar from "./MobileNavbar";
 
 interface Props {
@@ -18,10 +19,10 @@ const Navbar: React.FC<Props> = ({ isLogin }) => {
           <nav>
             <ul className="menus hidden md:flex justify-around my-auto">
               <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
-                Create Playlist
+                <Link to="/create">Create Playlist</Link>
               </li>
               <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
-                My Profile
+                <Link to="/me">My Profile</Link>
               </li>
               <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
                 My Playlists

@@ -11,12 +11,16 @@ export interface SongItem {
   image: string;
   album: {
     name: string;
+    artists: [
+      {
+        name: string;
+      }
+    ];
     images: [
       image: {
         url: string;
       }
     ];
-    release_date: string;
   };
   external_urls: {
     spotify: string;

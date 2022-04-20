@@ -8,7 +8,7 @@ interface Props {
   title: string;
   image: string;
   album: string;
-  releaseDate: string;
+  artist: string;
   link: string;
   isSelected: boolean;
   isExplicit: boolean;
@@ -19,7 +19,7 @@ const Song: React.FC<Props> = ({
   title,
   image,
   album,
-  releaseDate,
+  artist,
   link,
   isSelected,
   isExplicit,
@@ -56,7 +56,7 @@ const Song: React.FC<Props> = ({
         className="w-1/3 md:w-1/4 lg:w-1/5 mr-2 md:mr-4 object-contain rounded"
       />
       <div className="song-detail w-2/3">
-        <p className="text-xs sm:text-base md:text-lg">
+        <p className="text-sm sm:text-lg md:text-xl">
           <strong>
             <a
               href={link}
@@ -76,8 +76,8 @@ const Song: React.FC<Props> = ({
             </div>
           )}
         </p>
-        <p className="text-xs sm:text-base md:text-lg">{album}</p>
-        <p className="text-xs sm:text-base md:text-lg">{releaseDate}</p>
+        <p className="text-xs sm:text-base font-semibold">{artist}</p>
+        <p className="text-xs sm:text-base">{album}</p>
         <button
           onClick={(e) => selectedSongsHandler(e, isSelected)}
           className="block md:hidden mt-2"
@@ -86,7 +86,6 @@ const Song: React.FC<Props> = ({
             {selectedButton ? "Deselect" : "Select"}
           </span>
         </button>
-        )
       </div>
       <button
         onClick={(e) => selectedSongsHandler(e, isSelected)}

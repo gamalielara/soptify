@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Song from "../Song/Song";
-import "./songlists.css";
 import { SongItem } from "../../interface/interface";
 
 interface Props {
@@ -29,10 +28,10 @@ const SongsLists: React.FC<Props> = ({ songs }) => {
           title={song.name}
           image={song.album.images[0].url}
           album={song.album.name}
-          releaseDate={song.album.release_date}
           link={song.external_urls.spotify}
           isExplicit={song.explicit}
           uri={song.uri}
+          artist={song.album.artists[0].name}
           isSelected={
             selectedSongs.length > 0 && selectedSongs.includes(song.uri)
           }
