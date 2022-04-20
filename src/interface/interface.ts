@@ -24,3 +24,9 @@ export interface SongItem {
   explicit: boolean;
   uri: string;
 }
+
+export interface SelectedSongs {
+  selectedSongs: {
+    value: string[];
+  };
+}

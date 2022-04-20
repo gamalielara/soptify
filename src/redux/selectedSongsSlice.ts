@@ -8,7 +8,6 @@ const selectedSongsSlice = createSlice({
   reducers: {
     setSelectedSongs: (state, action) => {
       state.value = action.payload;
-      console.log(state.value);
     },
   },
 });

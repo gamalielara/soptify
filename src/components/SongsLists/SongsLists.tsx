@@ -19,7 +19,10 @@ const SongsLists: React.FC<Props> = ({ songs }) => {
     (state: SelectedSongs) => state.selectedSongs.value
   );
   return (
-    <section className="songs-container" title="section-container">
+    <section
+      className="songs-container w-full lg:w-2/3 mx-auto grid-rows-1 md:p-0 p-1"
+      title="section-container"
+    >
       {songs.map((song) => (
         <Song
           key={song.id}

@@ -1,8 +1,1 @@
-section.songs-container {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(100%);
-  width: 80%;
-  margin: 0 auto;
-  padding: 15px;
-}
+

@@ -3,6 +3,7 @@
   --green-spotify: #1ed760;
   --white-spotify: white;
   --black-spotify: #1c1c1c;
+  transition: all 0.5s ease;
 }
 
 .App {

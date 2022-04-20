@@ -1,11 +1,12 @@
 import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import { updateInput } from "../../redux/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import { useHistory } from "react-router-dom";
-import { SongItem } from "../../interface/interface";
+import { SelectedSongs, SongItem } from "../../interface/interface";
 import {
   FormControl,
   FormLabel,
@@ -27,12 +28,6 @@ interface Props {
 interface Search {
   search: {
     query: string;
-  };
-}
-
-interface SelectedSongs {
-  selectedSongs: {
-    value: string[];
   };
 }
 
@@ -137,78 +132,100 @@ const CreatePlaylist: React.FC<Props> = ({ token, setPlaylistID }) => {
 
   return (
     <>
-      <Flex m="50px auto" bg="white" width="50%" borderRadius="10px">
-        <Image
-          src="https://img.freepik.com/free-photo/handsome-man-listening-music-headphones_144627-18957.jpg"
-          alt=""
-          width="30%"
-          borderTopLeftRadius="10px"
-          borderBottomLeftRadius="10px"
-        />
-        <Box p={10} width="70%">
-          <FormControl isInvalid={checkTitleError}>
-            <Text fontSize="xl" mb={15} fontWeight={600} color="black">
-              Create A New playlist
-            </Text>
-            <FormLabel htmlFor="playlist-title">
-              Playlist Title (min. 10 words)
-            </FormLabel>
-            <Input
-              id="playlist-title"
-              placeholder="Insert Playlist Title Here ...."
-              name="title"
-              color="black"
-              onChange={playlistInfoInputHandler}
-            />
-            {checkTitleError ? (
-              <FormHelperText>
-                The playlist title must contain 10 characters or more.
-              </FormHelperText>
-            ) : (
-              <FormHelperText>Insert playlist title Here</FormHelperText>
-            )}
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="playlist-desc" mt={5}>
-              Playlist Description
-            </FormLabel>
-            <Input
-              id="playlist-desc"
-              placeholder="Insert Playlist Description Here ...."
-              name="desc"
-              color="black"
-              onChange={playlistInfoInputHandler}
-            />
-          </FormControl>
-        </Box>
-      </Flex>
-      <Box width="50%" margin="10px auto">
-        <Flex>
-          <Input
-            type="text"
-            placeholder="Find songs ..."
-            color="white"
-            onChange={inputChangeHandler}
+      <Navbar isLogin={true} />
+      <Box p={["3", "5", "10"]} minHeight={["120vh", "auto"]}>
+        <Flex
+          m="0 auto 20px"
+          bg="white"
+          width={{ sm: "100%", lg: "75%", xl: "50%" }}
+          borderRadius="10px"
+          direction={["column", "row"]}
+        >
+          <Image
+            src="https://img.freepik.com/free-photo/this-song-rocks-man-listening-favourite-song-headphones-with-smartphone-guy-earphones-listens-rock-music-man-concentrated-face-enjoy-listening-music-isolated-white-background-rock-radio-channel_474717-10137.jpg"
+            alt=""
+            width={["100%", "40%"]}
+            borderTopLeftRadius="10px"
+            borderTopRightRadius="10px"
+            borderBottomLeftRadius={{ sm: 0, md: "10px" }}
           />
-          <Button onClick={searchSongHandler} ml={5}>
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </Button>
+          <Box p={[5, 5, 5, 10, 10]} width={["100%", "60%"]}>
+            <FormControl isInvalid={checkTitleError}>
+              <Text
+                fontSize={["xl", "3xl", "5xl"]}
+                mb={15}
+                fontWeight={600}
+                color="black"
+              >
+                Create A New Playlist
+              </Text>
+              <FormLabel htmlFor="playlist-title">
+                <Text fontSize={["sm", "lg"]}>
+                  Playlist Title (min. 10 words)
+                </Text>
+              </FormLabel>
+              <Input
+                id="playlist-title"
+                placeholder="Insert Playlist Title Here ...."
+                name="title"
+                color="black"
+                onChange={playlistInfoInputHandler}
+              />
+              {checkTitleError ? (
+                <FormHelperText fontSize={["xs", "sm"]}>
+                  The playlist title must contain 10 characters or more.
+                </FormHelperText>
+              ) : (
+                <FormHelperText fontSize={["xs", "sm"]}>
+                  Insert playlist title Here
+                </FormHelperText>
+              )}
+            </FormControl>
+
+            <FormControl>
+              <FormLabel htmlFor="playlist-desc" mt={5} fontSize={["sm", "lg"]}>
+                Playlist Description
+              </FormLabel>
+              <Input
+                id="playlist-desc"
+                placeholder="Insert Playlist Description Here ...."
+                name="desc"
+                color="black"
+                onChange={playlistInfoInputHandler}
+              />
+            </FormControl>
+          </Box>
         </Flex>
+
+        <Box width={{ sm: "100%", lg: "75%", xl: "50%" }} margin="10px auto">
+          <Flex>
+            <Input
+              type="text"
+              placeholder="Find songs ..."
+              color="white"
+              onChange={inputChangeHandler}
+            />
+            <Button onClick={searchSongHandler} ml={5}>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </Button>
+          </Flex>
+        </Box>
+
+        {fetchedSongs && <SongsLists songs={fetchedSongs} />}
+
+        <Button
+          mt={4}
+          bg="greenSpotify"
+          type="submit"
+          variant="test"
+          onClick={submitHandler}
+          m="50px auto 0"
+          display="block"
+          isDisabled={selectedSongs.length === 0 || checkTitleError}
+        >
+          Create Playlist
+        </Button>
       </Box>
-
-      {fetchedSongs && <SongsLists songs={fetchedSongs} />}
-
-      <Button
-        mt={4}
-        bg="greenSpotify"
-        type="submit"
-        variant="test"
-        onClick={submitHandler}
-        m="50px auto 0"
-        display="block"
-      >
-        Create Playlist
-      </Button>
     </>
   );
 };
