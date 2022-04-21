@@ -19,7 +19,7 @@ const PaginationButton: React.FC<Props> = ({
         .map((i, n) => (
           <button
             key={n + 1}
-            className="mx-4 w-16 h-16 lg:w-8 lg:h-8"
+            className="mx-4 w-8 h-8"
             onClick={() => paginate(n + 1)}
           >
             {n + 1}

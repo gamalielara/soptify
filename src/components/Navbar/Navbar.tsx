@@ -17,7 +17,7 @@ const Navbar: React.FC<Props> = ({ page }) => {
     <>
       <header className="w-full h-16 sticky top-0 left-0 z-50 flex md:justify-between justify-center items-center px-8 bg-blackSpotify">
         <img
-          src="img/logo.png"
+          src="https://soptifygamaliel.vercel.app/img/logo.png"
           alt="Soptify by gamalielboanerges"
           className="lg:h-3/4 h-1/2 object-contain my-auto"
         />

@@ -75,8 +75,8 @@ const Playlist: React.FC = () => {
     <>
       <Navbar page={null} />
       <section className="playlist w-full p-4 md:p-8 lg:w-2/3 mx-auto">
-        <div className="playlist-info w-2/3 md:w-full flex">
-          <div className="image-wrapper w-1/5">
+        <div className="playlist-info w-full flex flex-col md:flex-row">
+          <div className="image-wrapper md:w-1/5 w-1/2 mx-auto md:mx-0 mb-4 md:mb-0">
             <div
               className="image-container w-full relative"
               style={{ paddingTop: "100%" }}
@@ -89,10 +89,14 @@ const Playlist: React.FC = () => {
             </div>
           </div>
           {playlist && (
-            <div className="desc ml-4 flex flex-col justify-center">
-              <p className="text-3xl font-bold">{playlist.name}</p>
-              <p className="text-xl font-semibold">{playlist.description}</p>
-              <p className="text-lg">
+            <div className="desc md:ml-4 flex flex-col justify-center">
+              <p className="lg:text-3xl md:text-2xl text-lg font-bold">
+                {playlist.name}
+              </p>
+              <p className="lg:text-xl md:text-base text-xs font-semibold">
+                {playlist.description}
+              </p>
+              <p className="md:text-lg text-xs">
                 {playlist?.owner.display_name} - {playlist.tracks.total} songs
               </p>
             </div>
