@@ -30,7 +30,6 @@ const Playlist: React.FC = () => {
   const [showedSongs, setShowedSongs] = useState<PlaylistTrackItem[] | null>(
     null
   );
-  // const [currentPage, setCurrentPage] = useState<number>(1);
   const params = useParams<Params>();
   const history = useHistory();
   params.id || <Redirect to="/" />;
@@ -70,7 +69,7 @@ const Playlist: React.FC = () => {
 
   useEffect(() => {
     paginate(1);
-  }, []);
+  }, [playlist?.tracks]);
 
   return (
     <>
