@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Song from "../Song/Song";
-import { SongItem } from "../../interface/interface";
+import { SongItem } from "../../global/interface";
 
 interface Props {
   songs: SongItem[];

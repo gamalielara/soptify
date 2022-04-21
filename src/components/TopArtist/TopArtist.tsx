@@ -6,7 +6,7 @@ interface Props {
   followers: number;
 }
 
-const Artist: React.FC<Props> = ({ src, name, followers }) => {
+const TopArtist: React.FC<Props> = ({ src, name, followers }) => {
   const [transparent, setTransparent] = useState<boolean>(true);
   return (
     <div
@@ -27,4 +27,4 @@ const Artist: React.FC<Props> = ({ src, name, followers }) => {
   );
 };
 
-export default Artist;
+export default TopArtist;

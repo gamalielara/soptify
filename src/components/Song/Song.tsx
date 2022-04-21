@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectedSongs } from "../../interface/interface";
+import { SelectedSongs } from "../../global/interface";
 import { setSelectedSongs } from "../../redux/selectedSongsSlice";
 import "./song.css";
 
@@ -68,12 +68,12 @@ const Song: React.FC<Props> = ({
             </a>
           </strong>
           {isExplicit && (
-            <div
+            <span
               className="explicit ml-1 inline-block bg-black/[.2] rounded"
               title="explicit"
             >
               <i className="fa-solid fa-e explicit"></i>
-            </div>
+            </span>
           )}
         </p>
         <p className="text-xs sm:text-base font-semibold">{artist}</p>

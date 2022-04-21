@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MobileNavbar from "./MobileNavbar";
+import "./navbar.css";
 
 interface Props {
-  isLogin: boolean;
+  page: "Create" | "Profile" | "MyPlaylists" | null;
 }
 
-const Navbar: React.FC<Props> = ({ isLogin }) => {
+const Navbar: React.FC<Props> = ({ page }) => {
+  const setClass = (menuName: string) =>
+    menuName === page
+      ? "selected-menu mx-4 font-semibold lg:text-xl md:text-base hover:cursor-pointer"
+      : "menu mx-4 font-semibold lg:text-xl md:text-base hover:cursor-pointer";
+
   return (
     <>
       <header className="w-full h-16 sticky top-0 left-0 z-50 flex md:justify-between justify-center items-center px-8 bg-blackSpotify">
@@ -15,24 +21,22 @@ const Navbar: React.FC<Props> = ({ isLogin }) => {
           alt="Soptify by gamalielboanerges"
           className="lg:h-3/4 h-1/2 object-contain my-auto"
         />
-        {isLogin && (
-          <nav>
-            <ul className="menus hidden md:flex justify-around my-auto">
-              <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
-                <Link to="/create">Create Playlist</Link>
-              </li>
-              <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
-                <Link to="/me">My Profile</Link>
-              </li>
-              <li className="mx-4 font-semibold lg:text-xl md:text-base text-white hover:text-greenSpotify hover:cursor-pointer">
-                My Playlists
-              </li>
-            </ul>
-          </nav>
-        )}
+        <nav>
+          <ul className="menus hidden md:flex justify-around my-auto">
+            <li className={`${setClass("Create")}`}>
+              <Link to="/create">Create Playlist</Link>
+            </li>
+            <li className={`${setClass("Profile")}`}>
+              <Link to="/me">My Profile</Link>
+            </li>
+            <li className={`${setClass("MyPlaylists")}`}>
+              <Link to="/myplaylists">My Playlists</Link>
+            </li>
+          </ul>
+        </nav>
       </header>
       <div className="mobile-nav block sm:hidden">
-        {isLogin && <MobileNavbar show={true} />}
+        <MobileNavbar page={page} />
       </div>
     </>
   );

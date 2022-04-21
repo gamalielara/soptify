@@ -1,8 +1,14 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
-import { ENDPOINTAPI } from "../../App";
-import Artist from "../../components/Artist/Artist";
+import { ENDPOINTAPI } from "../../global/variables";
 import Navbar from "../../components/Navbar/Navbar";
+import TopArtistSkeleton from "../../components/skeletons/TopArtistSkeleton";
+import TopTrackSkeleton from "../../components/skeletons/TopTrackSkeleton";
+import TopArtist from "../../components/TopArtist/TopArtist";
+import Track from "../../components/Track/Track";
+import { SongItem } from "../../global/interface";
+import { useHistory } from "react-router";
+import Footer from "../../components/Footer/Footer";
 
 interface User {
   display_name: string;
@@ -37,27 +43,11 @@ interface ArtistItem {
   uri: string;
 }
 
-interface Track {
-  album: {
-    name: string;
-  };
-  artists: [
-    {
-      href: string;
-      name: string;
-    }
-  ];
-  duration: number;
-  explicit: boolean;
-  href: string;
-  id: string;
-  name: string;
-}
-
 const Profile: React.FC = () => {
   const [user, setUser] = useState<null | User>(null);
   const [topArtists, setTopArtists] = useState<null | ArtistItem[]>(null);
-  const [topTracks, setTopTracks] = useState<null | Track[]>(null);
+  const [topTracks, setTopTracks] = useState<null | SongItem[]>(null);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -71,6 +61,12 @@ const Profile: React.FC = () => {
         setUser(data);
       } catch (err) {
         console.log(err);
+        const error = err as AxiosError;
+        if (error.response && error.response.status === 401) {
+          alert("Token expired!");
+          localStorage.clear();
+          history.push("/");
+        }
       }
     };
     fetchUser();
@@ -89,6 +85,12 @@ const Profile: React.FC = () => {
         setTopTracks(data);
       } catch (err) {
         console.log(err);
+        const error = err as AxiosError;
+        if (error.response && error.response.status === 401) {
+          alert("Token expired!");
+          localStorage.clear();
+          history.push("/");
+        }
       }
     };
     fetchTopTracks();
@@ -106,6 +108,12 @@ const Profile: React.FC = () => {
         setTopArtists(data);
       } catch (err) {
         console.log(err);
+        const error = err as AxiosError;
+        if (error.response && error.response.status === 401) {
+          alert("Token expired!");
+          localStorage.clear();
+          history.push("/");
+        }
       }
     };
     fetchTopArtists();
@@ -113,8 +121,8 @@ const Profile: React.FC = () => {
 
   return (
     <>
-      <Navbar isLogin={true} />
-      <section className="my-profile w-screen bg-blackSpotify p-2 md:p-4 lg:p-8 lg:px-24">
+      <Navbar page={"Profile"} />
+      <main className="my-profile w-full bg-blackSpotify p-2 md:p-4 lg:p-8 lg:px-24">
         {user && (
           <div className="profile-summary flex items-center w-full">
             <img
@@ -132,27 +140,47 @@ const Profile: React.FC = () => {
             </div>
           </div>
         )}
-
-        {topArtists && (
-          <div className="my-top-artists mt-8 md:mt-16">
-            <h3 className="text-3xl font-bold mb-8">My Top Artist</h3>
-            <div className="artists grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-self-center">
-              {topArtists.map((artist) => (
-                <Artist
-                  key={artist.id}
-                  src={artist.images[0].url}
-                  name={artist.name}
-                  followers={artist.followers.total}
-                />
-              ))}
-            </div>
+        <section className="my-top-artists mt-8 md:mt-16">
+          <h3 className="text-3xl font-bold mb-8">My Top Artist</h3>
+          <div className="artists grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-self-center">
+            {topArtists && topArtists.length === 10
+              ? topArtists.map((artist) => (
+                  <TopArtist
+                    key={artist.id}
+                    src={artist.images[0].url}
+                    name={artist.name}
+                    followers={artist.followers.total}
+                  />
+                ))
+              : Array(10)
+                  .fill(0)
+                  .map(() => <TopArtistSkeleton />)}
           </div>
-        )}
+        </section>
 
-        <div className="my-top-tracks mt-8 md:mt-16">
+        <section className="my-top-tracks mt-8 md:mt-16">
           <h3 className="text-3xl font-bold">My Top Tracks</h3>
-        </div>
-      </section>
+          <div className="top-tracks-container">
+            {topTracks && topTracks.length >= 10
+              ? topTracks.map((track, i) => (
+                  <Track
+                    n={i + 1}
+                    key={track.id}
+                    title={track.name}
+                    image={track.album.images[0].url}
+                    album={track.album.name}
+                    artist={track.artists[0].name}
+                    link={track.external_urls.spotify}
+                    isExplicit={track.explicit}
+                  />
+                ))
+              : Array(10)
+                  .fill(0)
+                  .map(() => <TopTrackSkeleton />)}
+          </div>
+        </section>
+      </main>
+      <Footer />
     </>
   );
 };

@@ -5,28 +5,33 @@ export interface Token {
 }
 
 export interface SongItem {
-  id: string;
-  name: string;
-  title: string;
-  image: string;
   album: {
     name: string;
-    artists: [
-      {
-        name: string;
-      }
-    ];
     images: [
-      image: {
+      {
         url: string;
       }
     ];
+    artists: [{ name: string }];
   };
+  artists: [
+    {
+      href: string;
+      name: string;
+    }
+  ];
+  duration: number;
+  explicit: boolean;
   external_urls: {
     spotify: string;
   };
-  explicit: boolean;
+  id: string;
+  name: string;
   uri: string;
+}
+
+export interface PlaylistTrackItem {
+  track: SongItem;
 }
 
 export interface SelectedSongs {

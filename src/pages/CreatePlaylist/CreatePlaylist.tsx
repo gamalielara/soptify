@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateInput } from "../../redux/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import { useHistory } from "react-router-dom";
-import { SelectedSongs, SongItem } from "../../interface/interface";
-import { ENDPOINTAPI } from "../../App";
+import { SelectedSongs, SongItem } from "../../global/interface";
+import { ENDPOINTAPI, HEADERAUTH } from "../../global/variables";
 import {
   FormControl,
   FormLabel,
@@ -19,10 +19,8 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-
-interface Props {
-  setPlaylistID: (playlistID: string) => void;
-}
+import SongItemSkeleton from "../../components/skeletons/SongItemSkeleton";
+import Footer from "../../components/Footer/Footer";
 
 interface Search {
   search: {
@@ -35,7 +33,7 @@ interface PlaylistInfo {
   desc?: string;
 }
 
-const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
+const CreatePlaylist: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const query = useSelector((state: Search) => state.search.query);
@@ -43,23 +41,14 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
     (state: SelectedSongs) => state.selectedSongs.value
   );
 
-  const [authToken, setAuthToken] = useState<string | null>(null);
   const [fetchedSongs, setFetchedSongs] = useState<SongItem[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo>({
     title: "",
     desc: "",
   });
 
   const USERID = process.env.REACT_APP_USER_ID;
-  const HEADERAUTH = {
-    headers: {
-      Authorization: "Bearer " + authToken,
-    },
-  };
-
-  useEffect(() => {
-    setAuthToken(localStorage.getItem("user"));
-  }, []);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateInput(e.target.value));
@@ -68,6 +57,7 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
   const searchSongHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const res = await axios.get(
         `${ENDPOINTAPI}/search?q=track:${query}&type=album,track`,
         HEADERAUTH
@@ -76,6 +66,14 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
       setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
+      const error = err as AxiosError;
+      if (error.response && error.response.status === 401) {
+        alert("Token expired!");
+        localStorage.clear();
+        history.push("/");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,7 +88,7 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
         `${ENDPOINTAPI}/users/${USERID}/playlists`,
         {
           name: playlistInfo.title,
-          public: false,
+          public: true,
           collaborative: false,
           description: playlistInfo.desc,
         },
@@ -105,6 +103,7 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
 
   const addSongsToPlaylist = async (playlistID: string) => {
     try {
+      console.log(isLoading);
       await axios.post(
         `${ENDPOINTAPI}/playlists/${playlistID}/tracks`,
         {
@@ -115,14 +114,20 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
       );
     } catch (err) {
       console.log(err);
+      const error = err as AxiosError;
+      if (error.response && error.response.status === 401) {
+        alert("Token expired!");
+        localStorage.clear();
+        history.push("/");
+      }
     }
   };
 
   const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    createPlaylist().then((playlistID: string) => {
-      setPlaylistID(playlistID);
-      history.push("/summary");
+    createPlaylist().then(() => {
+      alert(`Playlist ${playlistInfo.title} is successfully created!`);
+      history.push("/myplaylists");
     });
   };
 
@@ -130,8 +135,8 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
 
   return (
     <>
-      <Navbar isLogin={true} />
-      <Box p={["3", "5", "10"]} minHeight={["120vh", "auto"]}>
+      <Navbar page={"Create"} />
+      <section className="create-playlist min-h-screen sm:min-h-fit pb-28 md:pb-4 p-4">
         <Flex
           m="0 auto 20px"
           bg="white"
@@ -207,7 +212,17 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
           </Flex>
         </Box>
 
-        {fetchedSongs && <SongsLists songs={fetchedSongs} />}
+        {isLoading
+          ? Array(10)
+              .fill(0)
+              .map(() => <SongItemSkeleton />)
+          : fetchedSongs && <SongsLists songs={fetchedSongs} />}
+
+        {fetchedSongs && fetchedSongs.length === 0 && (
+          <p className="font-bold text-lg md:text-xl text-center mt-8">
+            No songs found
+          </p>
+        )}
 
         <Button
           mt={4}
@@ -215,13 +230,14 @@ const CreatePlaylist: React.FC<Props> = ({ setPlaylistID }) => {
           type="submit"
           variant="test"
           onClick={submitHandler}
-          m="50px auto 0"
+          m="0 auto"
           display="block"
           isDisabled={selectedSongs.length === 0 || checkTitleError}
         >
           Create Playlist
         </Button>
-      </Box>
+      </section>
+      <Footer />
     </>
   );
 };

@@ -1,0 +1,15 @@
+.menu {
+  color: white;
+}
+
+.menu:hover {
+  color: var(--green-spotify);
+}
+
+.selected-menu {
+  color: var(--green-spotify);
+}
+
+.selected-menu:hover {
+  color: white;
+}

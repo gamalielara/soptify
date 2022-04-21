@@ -18,7 +18,6 @@ const theme = extendTheme({
       h6: { color: "white" },
       p: { color: "white" },
       a: {
-        color: "white",
         textDecoration: "none",
       },
       span: { color: "white" },
