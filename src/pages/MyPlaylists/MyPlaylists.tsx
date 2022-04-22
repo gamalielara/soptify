@@ -5,7 +5,6 @@ import MyPlaylistItem from "../../components/MyPlaylistItem/MyPlaylistItem";
 import Navbar from "../../components/Navbar/Navbar";
 import PlaylistItemSkeleton from "../../components/skeletons/PlaylistItemSkeleton";
 import Footer from "../../components/Footer/Footer";
-import { useHistory } from "react-router";
 
 interface Playlist {
   description: string;
@@ -28,7 +27,6 @@ interface Playlist {
 
 const MyPlaylists: React.FC = () => {
   const [myPlaylists, setMyPlaylists] = useState<Playlist[] | null>(null);
-  const history = useHistory();
 
   useEffect(() => {
     const getMyPlaylists = async () => {
@@ -47,7 +45,7 @@ const MyPlaylists: React.FC = () => {
         if (error.response && error.response.status === 401) {
           alert("Token expired!");
           localStorage.clear();
-          history.push("/");
+          window.location.reload();
         }
       }
     };
@@ -73,7 +71,7 @@ const MyPlaylists: React.FC = () => {
               ))
             : Array(10)
                 .fill(0)
-                .map(() => <PlaylistItemSkeleton />)}
+                .map((item, i) => <PlaylistItemSkeleton key={i} />)}
         </section>
       </main>
       <Footer />

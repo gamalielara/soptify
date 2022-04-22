@@ -112,7 +112,7 @@ const Profile: React.FC = () => {
         if (error.response && error.response.status === 401) {
           alert("Token expired!");
           localStorage.clear();
-          history.push("/");
+          window.location.reload();
         }
       }
     };

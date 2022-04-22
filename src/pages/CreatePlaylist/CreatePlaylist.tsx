@@ -70,7 +70,7 @@ const CreatePlaylist: React.FC = () => {
       if (error.response && error.response.status === 401) {
         alert("Token expired!");
         localStorage.clear();
-        history.push("/");
+        window.location.reload();
       }
     } finally {
       setIsLoading(false);
@@ -118,7 +118,7 @@ const CreatePlaylist: React.FC = () => {
       if (error.response && error.response.status === 401) {
         alert("Token expired!");
         localStorage.clear();
-        history.push("/");
+        window.location.reload();
       }
     }
   };
@@ -212,11 +212,17 @@ const CreatePlaylist: React.FC = () => {
           </Flex>
         </Box>
 
-        {isLoading
-          ? Array(10)
+        {isLoading ? (
+          <div className="loading-songs w-full lg:w-2/3 mx-auto">
+            {Array(10)
               .fill(0)
-              .map(() => <SongItemSkeleton />)
-          : fetchedSongs && <SongsLists songs={fetchedSongs} />}
+              .map(() => (
+                <SongItemSkeleton />
+              ))}
+          </div>
+        ) : (
+          fetchedSongs && <SongsLists songs={fetchedSongs} />
+        )}
 
         {fetchedSongs && fetchedSongs.length === 0 && (
           <p className="font-bold text-lg md:text-xl text-center mt-8">

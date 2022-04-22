@@ -53,7 +53,7 @@ const Song: React.FC<Props> = ({
       <img
         src={image}
         alt={title}
-        className="w-1/3 md:w-1/4 lg:w-1/5 mr-2 md:mr-4 object-contain rounded"
+        className="w-1/3 md:w-1/4 lg:w-1/12 mr-2 md:mr-4 object-contain rounded"
       />
       <div className="song-detail w-2/3">
         <p className="text-sm sm:text-lg md:text-xl">

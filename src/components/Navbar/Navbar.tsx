@@ -35,7 +35,7 @@ const Navbar: React.FC<Props> = ({ page }) => {
           </ul>
         </nav>
       </header>
-      <div className="mobile-nav block sm:hidden">
+      <div className="mobile-nav block md:hidden">
         <MobileNavbar page={page} />
       </div>
     </>

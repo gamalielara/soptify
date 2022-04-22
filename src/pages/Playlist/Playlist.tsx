@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory, useParams } from "react-router";
+import { Redirect, useParams } from "react-router";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import PaginationButton from "../../components/PaginationButton/PaginationButton";
+import SongItemSkeleton from "../../components/skeletons/SongItemSkeleton";
 import Track from "../../components/Track/Track";
 import { PlaylistTrackItem } from "../../global/interface";
 import { ENDPOINTAPI, HEADERAUTH } from "../../global/variables";
@@ -31,7 +32,6 @@ const Playlist: React.FC = () => {
     null
   );
   const params = useParams<Params>();
-  const history = useHistory();
   params.id || <Redirect to="/" />;
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Playlist: React.FC = () => {
         if (error.response && error.response.status === 401) {
           alert("Token expired!");
           localStorage.clear();
-          history.push("/");
+          window.location.reload();
         }
       }
     };
@@ -103,19 +103,22 @@ const Playlist: React.FC = () => {
           )}
         </div>
         <div className="songs-container">
-          {showedSongs &&
-            showedSongs.map((song) => (
-              <Track
-                n={null}
-                key={song.track.id}
-                title={song.track.name}
-                image={song.track.album.images[0].url}
-                album={song.track.album.name}
-                artist={song.track.artists[0].name}
-                link={song.track.external_urls.spotify}
-                isExplicit={song.track.explicit}
-              />
-            ))}
+          {showedSongs
+            ? showedSongs.map((song) => (
+                <Track
+                  n={null}
+                  key={song.track.id}
+                  title={song.track.name}
+                  image={song.track.album.images[0].url}
+                  album={song.track.album.name}
+                  artist={song.track.artists[0].name}
+                  link={song.track.external_urls.spotify}
+                  isExplicit={song.track.explicit}
+                />
+              ))
+            : Array(10)
+                .fill(0)
+                .map((item, i) => <SongItemSkeleton key={i} />)}
         </div>
         {playlist && (
           <div className="pagination-button flex w-full justify-center mt-8">
