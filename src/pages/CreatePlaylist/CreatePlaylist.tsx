@@ -58,7 +58,7 @@ const CreatePlaylist: React.FC = () => {
       setIsLoading(true);
       const res = await axios.get(
         `${ENDPOINTAPI}/search?q=track:${query}&type=album,track`,
-        HEADERAUTH
+        HEADERAUTH(localStorage.getItem("user")!)
       );
       const tracks = res.data.tracks.items;
       setFetchedSongs(tracks);
@@ -84,7 +84,7 @@ const CreatePlaylist: React.FC = () => {
           collaborative: false,
           description: playlistInfo.desc,
         },
-        HEADERAUTH
+        HEADERAUTH(localStorage.getItem("user")!)
       );
       addSongsToPlaylist(res.data.id);
       return res.data.id;
@@ -102,7 +102,7 @@ const CreatePlaylist: React.FC = () => {
           uris: selectedSongs,
           position: 0,
         },
-        HEADERAUTH
+        HEADERAUTH(localStorage.getItem("user")!)
       );
     } catch (err) {
       console.log(err);

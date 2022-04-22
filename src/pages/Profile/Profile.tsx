@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
-import { ENDPOINTAPI } from "../../global/variables";
+import { ENDPOINTAPI, HEADERAUTH } from "../../global/variables";
 import Navbar from "../../components/Navbar/Navbar";
 import TopArtistSkeleton from "../../components/skeletons/TopArtistSkeleton";
 import TopTrackSkeleton from "../../components/skeletons/TopTrackSkeleton";
@@ -75,11 +75,10 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchTopTracks = async () => {
       try {
-        const res = await axios.get(`${ENDPOINTAPI}/me/top/tracks?limit=10`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("user"),
-          },
-        });
+        const res = await axios.get(
+          `${ENDPOINTAPI}/me/top/tracks?limit=10`,
+          HEADERAUTH(localStorage.getItem("user")!)
+        );
         const data = res.data.items;
         setTopTracks(data);
       } catch (err) {
@@ -98,11 +97,10 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchTopArtists = async () => {
       try {
-        const res = await axios.get(`${ENDPOINTAPI}/me/top/artists?limit=10`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("user"),
-          },
-        });
+        const res = await axios.get(
+          `${ENDPOINTAPI}/me/top/artists?limit=10`,
+          HEADERAUTH(localStorage.getItem("user")!)
+        );
         const data = res.data.items;
         setTopArtists(data);
       } catch (err) {
