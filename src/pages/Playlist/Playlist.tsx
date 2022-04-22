@@ -54,7 +54,7 @@ const Playlist: React.FC = () => {
       }
     };
     getPlaylistInfo();
-  }, []);
+  });
 
   // pagination
   const songsPerPage = 20;
@@ -70,7 +70,7 @@ const Playlist: React.FC = () => {
   // updating pagination
   useEffect(() => {
     paginate(1);
-  }, [playlist?.tracks]);
+  }, []);
 
   return (
     <>

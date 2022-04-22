@@ -7,7 +7,6 @@ import TopTrackSkeleton from "../../components/skeletons/TopTrackSkeleton";
 import TopArtist from "../../components/TopArtist/TopArtist";
 import Track from "../../components/Track/Track";
 import { SongItem } from "../../global/interface";
-import { useHistory } from "react-router";
 import Footer from "../../components/Footer/Footer";
 
 interface User {
@@ -47,7 +46,6 @@ const Profile: React.FC = () => {
   const [user, setUser] = useState<null | User>(null);
   const [topArtists, setTopArtists] = useState<null | ArtistItem[]>(null);
   const [topTracks, setTopTracks] = useState<null | SongItem[]>(null);
-  const history = useHistory();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -65,7 +63,7 @@ const Profile: React.FC = () => {
         if (error.response && error.response.status === 401) {
           alert("Token expired!");
           localStorage.clear();
-          history.push("/");
+          window.location.reload();
         }
       }
     };
@@ -87,7 +85,7 @@ const Profile: React.FC = () => {
         if (error.response && error.response.status === 401) {
           alert("Token expired!");
           localStorage.clear();
-          history.push("/");
+          window.location.reload();
         }
       }
     };

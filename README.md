@@ -27,6 +27,7 @@ Soptify has in general five pages:
 3. Modern UI and style created using Chakra UI and Tailwindcss
 4. Cool user experience! This app uses animated skeleton loading, so this app would not be boring if you have bad signal!
 5. This app passes two types of testing: the unit testing and mocking api. This feature is done by Jest and MSW ([Mock Serve Worker](https://mswjs.io/))
+6. Pagination is used in showing songs of the playlists!
 
 ## Preview
 

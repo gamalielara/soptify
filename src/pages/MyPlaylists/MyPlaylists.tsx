@@ -38,7 +38,6 @@ const MyPlaylists: React.FC = () => {
         });
         const data = res.data.items;
         setMyPlaylists(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
         const error = err as AxiosError;

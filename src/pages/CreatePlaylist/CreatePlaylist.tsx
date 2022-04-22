@@ -64,6 +64,12 @@ const CreatePlaylist: React.FC = () => {
       setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
+      const error = err as AxiosError;
+      if (error.response && error.response.status === 401) {
+        alert("Token expired!");
+        localStorage.clear();
+        window.location.reload();
+      }
     } finally {
       setIsLoading(false);
     }
@@ -90,12 +96,17 @@ const CreatePlaylist: React.FC = () => {
       return res.data.id;
     } catch (err) {
       console.log(err);
+      const error = err as AxiosError;
+      if (error.response && error.response.status === 401) {
+        alert("Token expired!");
+        localStorage.clear();
+        window.location.reload();
+      }
     }
   };
 
   const addSongsToPlaylist = async (playlistID: string) => {
     try {
-      console.log(isLoading);
       await axios.post(
         `${ENDPOINTAPI}/playlists/${playlistID}/tracks`,
         {
@@ -208,8 +219,8 @@ const CreatePlaylist: React.FC = () => {
           <div className="loading-songs w-full lg:w-2/3 mx-auto">
             {Array(10)
               .fill(0)
-              .map(() => (
-                <SongItemSkeleton />
+              .map((item, i) => (
+                <SongItemSkeleton key={i} />
               ))}
           </div>
         ) : (
