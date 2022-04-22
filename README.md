@@ -1,4 +1,4 @@
-[SOPTIFY by Ara Gamaliel Boanerges](/public/img/logo.png)
+[SOPTIFY by Ara Gamaliel Boanerges](https://github.com/gamalielara/gengigih-hw/blob/main//public/img/logo.png)
 
 # **SOPTIFY by Ara Gamaliel Boanerges**
 
@@ -30,21 +30,21 @@ Soptify has in general five pages:
 
 ## Preview
 
-![My Playlist Page](/screenshots/1.jpg)
+![My Playlist Page](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/1.jpg)
 My Playlist Page
 
-| ![Profile Page (Mobile)](/screenshots/2.jpg) | ![Profile Page (Desktop)](/screenshots/3.jpg) |
-| -------------------------------------------- | --------------------------------------------- |
-| Profile Page (Mobile)                        | Profile Page (Desktop)                        |
+| ![Profile Page (Mobile)](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/2.jpg) | ![Profile Page (Desktop)](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/3.jpg) |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| Profile Page (Mobile)                                                                            | Profile Page (Desktop)                                                                            |
 
-![My Top Tracks](/screenshots/4.jpg)
+![My Top Tracks](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/4.jpg)
 My Top Tracks
 
-| ![Create Playlist (Mobile)](/screenshots/5.jpg) | ![Create Playlist (Desktop)](/screenshots/6.jpg) |
-| ----------------------------------------------- | ------------------------------------------------ |
-| Create Playlist (Mobile)                        | Create Playlist (Desktop)                        |
+| ![Create Playlist (Mobile)](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/5.jpg) | ![Create Playlist (Desktop)](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/6.jpg) |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Create Playlist (Mobile)                                                                            | Create Playlist (Desktop)                                                                            |
 
-![Search Songs](/screenshots/7.jpg)
+![Search Songs](https://github.com/gamalielara/gengigih-hw/blob/main/screenshots/7.jpg)
 Search Songs
 
 ## How To Run
