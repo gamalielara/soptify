@@ -25,7 +25,7 @@ const Auth: React.FC = () => {
       {token && (
         <div className="auth">
           <h1>Authentication is Successful!</h1>
-          <Link to="/create">Continue to Soptify</Link>
+          <Link to="/me">Continue to Soptify</Link>
         </div>
       )}
     </>

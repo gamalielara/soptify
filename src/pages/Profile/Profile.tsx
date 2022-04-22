@@ -81,7 +81,6 @@ const Profile: React.FC = () => {
           },
         });
         const data = res.data.items;
-        console.log(data);
         setTopTracks(data);
       } catch (err) {
         console.log(err);
@@ -154,7 +153,7 @@ const Profile: React.FC = () => {
                 ))
               : Array(10)
                   .fill(0)
-                  .map(() => <TopArtistSkeleton />)}
+                  .map((item, i) => <TopArtistSkeleton key={i} />)}
           </div>
         </section>
 
@@ -176,7 +175,7 @@ const Profile: React.FC = () => {
                 ))
               : Array(10)
                   .fill(0)
-                  .map(() => <TopTrackSkeleton />)}
+                  .map((item, i) => <TopTrackSkeleton key={i} />)}
           </div>
         </section>
       </main>
