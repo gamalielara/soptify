@@ -30,11 +30,11 @@ Soptify has in general five pages:
 
 ## Preview
 
-[My Playlist Page](screenshots/1.jpg)
-| [Profile Page (Mobile)](screenshots/2.jpg) | [Profile Page (Desktop)](screenshots/3.jpg) |
-[My Top Tracks](screenshots/4.jpg)
-| [Create Playlist (Mobile)](screenshots/5.jpg) | [Create Playlist (Desktop)](screenshots/6.jpg) |
-[Search Songs](screenshots/7.jpg)
+![My Playlist Page](screenshots/1.jpg)
+| ![Profile Page (Mobile)](screenshots/2.jpg) | ![Profile Page (Desktop)](screenshots/3.jpg) |
+![My Top Tracks](screenshots/4.jpg)
+| ![Create Playlist (Mobile)](screenshots/5.jpg) | ![Create Playlist (Desktop)](screenshots/6.jpg) |
+![Search Songs](screenshots/7.jpg)
 
 ## How To Run
 
