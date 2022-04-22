@@ -39,7 +39,7 @@ const Playlist: React.FC = () => {
       try {
         const res = await axios.get(
           `${ENDPOINTAPI}/playlists/${params.id}?limit=500`,
-          HEADERAUTH
+          HEADERAUTH(localStorage.getItem("user")!)
         );
         const data = res.data;
         setPlaylist(data);
@@ -67,6 +67,7 @@ const Playlist: React.FC = () => {
       );
   };
 
+  // updating pagination
   useEffect(() => {
     paginate(1);
   }, [playlist?.tracks]);
