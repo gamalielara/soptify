@@ -4,3 +4,4 @@ export const HEADERAUTH = {
     Authorization: "Bearer " + localStorage.getItem("user"),
   },
 };
+export const USERID = process.env.REACT_APP_USER_ID;

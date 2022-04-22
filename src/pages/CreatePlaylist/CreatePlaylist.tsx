@@ -7,7 +7,7 @@ import axios, { AxiosError } from "axios";
 import SongsLists from "../../components/SongsLists/SongsLists";
 import { useHistory } from "react-router-dom";
 import { SelectedSongs, SongItem } from "../../global/interface";
-import { ENDPOINTAPI, HEADERAUTH } from "../../global/variables";
+import { ENDPOINTAPI, HEADERAUTH, USERID } from "../../global/variables";
 import {
   FormControl,
   FormLabel,
@@ -47,8 +47,6 @@ const CreatePlaylist: React.FC = () => {
     title: "",
     desc: "",
   });
-
-  const USERID = process.env.REACT_APP_USER_ID;
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateInput(e.target.value));
