@@ -64,12 +64,6 @@ const CreatePlaylist: React.FC = () => {
       setFetchedSongs(tracks);
     } catch (err) {
       console.log(err);
-      const error = err as AxiosError;
-      if (error.response && error.response.status === 401) {
-        alert("Token expired!");
-        localStorage.clear();
-        window.location.reload();
-      }
     } finally {
       setIsLoading(false);
     }
