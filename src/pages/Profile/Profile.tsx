@@ -81,12 +81,6 @@ const Profile: React.FC = () => {
         setTopTracks(data);
       } catch (err) {
         console.log(err);
-        const error = err as AxiosError;
-        if (error.response && error.response.status === 401) {
-          alert("Token expired!");
-          localStorage.clear();
-          window.location.reload();
-        }
       }
     };
     fetchTopTracks();
@@ -103,12 +97,6 @@ const Profile: React.FC = () => {
         setTopArtists(data);
       } catch (err) {
         console.log(err);
-        const error = err as AxiosError;
-        if (error.response && error.response.status === 401) {
-          alert("Token expired!");
-          localStorage.clear();
-          window.location.reload();
-        }
       }
     };
     fetchTopArtists();
