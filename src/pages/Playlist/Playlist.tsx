@@ -43,7 +43,8 @@ const Playlist: React.FC = () => {
         );
         const data = res.data;
         setPlaylist(data);
-        paginate(1);
+        // set the first 20 songs as the showed songs
+        setShowedSongs(data.tracks.items.slice(0, 19));
       } catch (err) {
         console.log(err);
         const error = err as AxiosError;
@@ -55,7 +56,7 @@ const Playlist: React.FC = () => {
       }
     };
     getPlaylistInfo();
-  });
+  }, []);
 
   // pagination
   const songsPerPage = 20;
@@ -67,11 +68,6 @@ const Playlist: React.FC = () => {
         playlist.tracks.items.slice(firstSongIndex, lastSongIndex)
       );
   };
-
-  // updating pagination
-  // useEffect(() => {
-  //   paginate(1);
-  // }, [playlist.tracks]);
 
   return (
     <>
