@@ -43,6 +43,7 @@ const Playlist: React.FC = () => {
         );
         const data = res.data;
         setPlaylist(data);
+        paginate(1);
       } catch (err) {
         console.log(err);
         const error = err as AxiosError;
@@ -68,9 +69,9 @@ const Playlist: React.FC = () => {
   };
 
   // updating pagination
-  useEffect(() => {
-    paginate(1);
-  }, [playlist?.tracks]);
+  // useEffect(() => {
+  //   paginate(1);
+  // }, [playlist.tracks]);
 
   return (
     <>
